@@ -10,10 +10,10 @@
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
 </script>
 
-<AppBar>
+<AppBar gridColumns="grid-cols-3" slotDefault="place-self-center" slotTrail="place-content-end">
 	<svelte:fragment slot="lead"><Logo /></svelte:fragment>
+	<h1 class="h1">Locus</h1>
 	<svelte:fragment slot="trail"><AppBarActions /></svelte:fragment>
-	<svelte:fragment slot="headline"><h1 class="h1">Locus</h1></svelte:fragment>
 </AppBar>
 
-<slot />
+<slot/>
