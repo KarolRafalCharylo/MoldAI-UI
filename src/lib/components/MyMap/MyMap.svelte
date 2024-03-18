@@ -5,11 +5,23 @@
 	let mapElement: HTMLDivElement | null = null;
 	let map: L.Map | null = null;
 
+	export let markerCoords: [number, number] | null;
+	let myMarker: L.Marker | null = null;
+
+	$: if (myMarker && markerCoords && map) {
+		myMarker.setLatLng(markerCoords);
+		myMarker.addTo(map);
+	} else {
+		if (myMarker) {
+			myMarker.remove();
+		}
+	}
+
 	onMount(async () => {
 		if (browser && mapElement) {
 			const leaflet = await import('leaflet');
 
-			map = leaflet.map(mapElement).setView([51.505, -0.09], 13);
+			map = leaflet.map(mapElement).setView([0, 0], 2);
 
 			leaflet
 				.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -18,11 +30,10 @@
 				})
 				.addTo(map);
 
-			leaflet
-				.marker([51.5, -0.09])
-				.addTo(map)
-				.bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
-				.openPopup();
+			myMarker = leaflet.marker([51.5, -0.09]);
+			// .addTo(map)
+			// .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+			// .openPopup();
 		}
 	});
 

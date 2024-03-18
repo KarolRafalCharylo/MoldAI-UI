@@ -1,16 +1,22 @@
 <script lang="ts">
 	import MyMap from '$lib/components/MyMap/MyMap.svelte';
 	import FileUpload from '$lib/components/FileUpload/FileUpload.svelte';
+	import { cellCenter } from '$lib/utils/cellUtils';
 
-	function handlePrediction(event: { detail: any; }) {
-		console.log("mypred", event.detail);
+	let mc: [number, number] | null = null;
+	function handlePrediction(event: { detail: Array<[string, number]> }) {
+		// console.log("mypred", event.detail);
 
-        // find cell with highest probability
-        let max = 0;
-        
+		const a = event.detail;
+		// find cell with highest probability
+		a.sort((a, b) => b[1] - a[1]);
+		console.log('mypred', a);
+		const maxCell = a[0][0];
+		const maxCoord = cellCenter(maxCell);
+
+		console.log('maxCell', maxCoord);
+		mc = maxCoord;
 	}
-
-    
 </script>
 
 <div class="container h-full mx-auto flex justify-center items-center my-8">
@@ -22,8 +28,9 @@
 				accessible solution for predicting the location of where an image on Earth was captured.
 			</b>
 		</p>
+
 		<p>Drop an image below to get started!</p>
 		<FileUpload on:prediction={handlePrediction} />
-		<MyMap />
+		<MyMap markerCoords={mc} />
 	</div>
 </div>
