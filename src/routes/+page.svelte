@@ -2,20 +2,26 @@
 	import MyMap from '$lib/components/MyMap/MyMap.svelte';
 	import FileUpload from '$lib/components/FileUpload/FileUpload.svelte';
 	import { cellCenter } from '$lib/utils/cellUtils';
+	import PredList from '$lib/components/PredList/PredList.svelte';
+	import type { Prediction } from '$lib/components/PredList/PredList.svelte';
 
-	let mc: [number, number] | null = null;
+	let predictions: Prediction[] | null = null;
+
+	let activePins: Array<number> = [];
+	$: markerCoords = predictions
+		? (predictions.slice(0, 10).map((p) => [p.lat, p.lon]) as Array<[number, number]>)
+		: null;
+
 	function handlePrediction(event: { detail: Array<[string, number]> }) {
-		// console.log("mypred", event.detail);
-
 		const a = event.detail;
-		// find cell with highest probability
 		a.sort((a, b) => b[1] - a[1]);
-		console.log('mypred', a);
-		const maxCell = a[0][0];
-		const maxCoord = cellCenter(maxCell);
 
-		console.log('maxCell', maxCoord);
-		mc = maxCoord;
+		predictions = a.map((p) => {
+			const [cell, prob] = p;
+			const [lat, lon] = cellCenter(cell);
+			return { cell, lat, lon, prob };
+		});
+		activePins = [0, 1, 2];
 	}
 </script>
 
@@ -29,8 +35,9 @@
 			</b>
 		</p>
 
-		<p>Drop an image below to get started!</p>
+		<p class="text-center">Drop an image below to get started!</p>
 		<FileUpload on:prediction={handlePrediction} />
-		<MyMap markerCoords={mc} />
+		<MyMap {markerCoords} {activePins} />
+		<PredList {predictions} bind:activePins />
 	</div>
 </div>
