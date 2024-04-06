@@ -25,7 +25,7 @@
 	}
 </script>
 
-<div class="container h-full mx-auto flex justify-center items-center my-8 max-w-full">
+<div class="container h-fit mx-auto flex justify-center my-8 max-w-full">
 	<div class="space-y-5 mt-2 mx-2 flex flex-col items-center max-w-full px-2">
 		<!-- <h2 class="h2">Welcome to Locus!</h2>-->
 		<p class="max-w-[300px] sm:max-w-[400px] text-justify">

@@ -2,7 +2,7 @@
 	import { FileDropzone } from '@skeletonlabs/skeleton';
 	import { UploadSolid, FileImageSolid } from 'flowbite-svelte-icons';
 	import { createEventDispatcher } from 'svelte';
-    import { PUBLIC_API_URL } from '$env/static/public';
+	import { PUBLIC_API_URL } from '$env/static/public';
 
 	let containerElement: HTMLDivElement | null = null;
 	let bgElement: HTMLDivElement | null = null;
@@ -85,21 +85,22 @@
 
 <div
 	bind:this={containerElement}
-	class="flex justify-center max-h-[800px] h-fit max-w-full overflow-hidden"
+	class='flex justify-center max-h-[800px]  max-w-full h-fit'
 >
 	<div
 		bind:this={bgElement}
-		class="bg-cover bg-center rounded-lg w-full transition-all max-w- max-h-[800px] overflow-hidden"
+		class="bg-cover bg-center rounded-lg w-full transition-all max-w-full max-h-[800px] overflow-hidden"
 	>
 		<FileDropzone
 			name="files"
 			on:change={onChangeHandler}
 			bind:files
 			id="test"
-			padding={noFileSelected ? 'p-24' : 'p-24 !bg-white/[0] h-full hover:backdrop-blur-sm'}
+			padding={noFileSelected ? 'p-auto' : '!bg-white/[0] h-full hover:backdrop-blur-sm max-w-full'}
 			regionInterface={noFileSelected
 				? 'p-8'
-				: 'p-8 bg-black/[0.5] backdrop-blur-xl rounded-md drop-shadow-lg'}
+				: 'px-8 py-4 bg-black/[0.5] backdrop-blur-xl rounded-md drop-shadow-lg max-w-[90%]'}
+			regionInterfaceText={noFileSelected ? '' : 'm-2 max-w-full max-h-full'}
 		>
 			<svelte:fragment slot="lead">
 				{#if noFileSelected}
@@ -109,11 +110,14 @@
 				{/if}
 			</svelte:fragment>
 			<svelte:fragment slot="message">
-				{#if noFileSelected}
+                <div class="max-w-full">
+
+                    {#if noFileSelected}
 					<b>Upload a file</b> or drag and drop
-				{:else}
-					Predicting location of <code class="code">{files[0].name}</code>
-				{/if}
+                    {:else}
+					Predicting location of <code class="code text-ellipsis break-words max-w-full inline-block overflow-hidden">{files[0].name}</code>
+                    {/if}
+                </div>
 			</svelte:fragment>
 			<svelte:fragment slot="meta">
 				<small>
