@@ -68,7 +68,7 @@
 		// Append the file to the FormData object
 		formData.append('img', files[0]);
 
-		const response1 = fetch('http://localhost:8000/predict', {
+		const response1 = fetch(`${process.env.API_URL}/predict`, {
 			method: 'POST',
 			body: formData
 		})
