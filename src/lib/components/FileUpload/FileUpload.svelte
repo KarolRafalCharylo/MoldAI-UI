@@ -2,6 +2,7 @@
 	import { FileDropzone } from '@skeletonlabs/skeleton';
 	import { UploadSolid, FileImageSolid } from 'flowbite-svelte-icons';
 	import { createEventDispatcher } from 'svelte';
+    import { PUBLIC_API_URL } from '$env/static/public';
 
 	let containerElement: HTMLDivElement | null = null;
 	let bgElement: HTMLDivElement | null = null;
@@ -68,7 +69,7 @@
 		// Append the file to the FormData object
 		formData.append('img', files[0]);
 
-		const response1 = fetch(`${process.env.PUBLIC_API_URL}/predict`, {
+		const response1 = fetch(`${PUBLIC_API_URL}/predict`, {
 			method: 'POST',
 			body: formData
 		})
