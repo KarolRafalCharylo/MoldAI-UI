@@ -69,7 +69,7 @@
 		// Append the file to the FormData object
 		formData.append('img', files[0]);
 
-		const response1 = fetch(`${PUBLIC_API_URL}/predict`, {
+		const response1 = fetch(`${PUBLIC_API_URL}/predict/`, {
 			method: 'POST',
 			body: formData
 		})
