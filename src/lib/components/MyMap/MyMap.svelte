@@ -67,7 +67,7 @@
 	});
 </script>
 
-<div id="map" class="w-full aspect-[3/1] rounded-lg max-w-[100%]">
+<div id="map" class="w-full aspect-[3/1] rounded-lg max-w-[100%] min-h-[200px]">
 	<div bind:this={mapElement} class="rounded-lg" />
 </div>
 

@@ -85,7 +85,7 @@
 
 <div
 	bind:this={containerElement}
-	class="flex justify-center max-h-[800px] h-fit max-w-[100%] overflow-hidden"
+	class="flex justify-center max-h-[800px] h-fit max-w-full overflow-hidden"
 >
 	<div
 		bind:this={bgElement}

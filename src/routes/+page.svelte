@@ -25,17 +25,17 @@
 	}
 </script>
 
-<div class="container h-full mx-auto flex justify-center items-center my-8">
-	<div class="space-y-5 mt-4 mx-2">
-		<h2 class="h2">Welcome to Locus!</h2>
-		<p>
-			<b>
-				The LOCUS project (LOCalisation of Unidentified imageS) aims to offer a practical and
+<div class="container h-full mx-auto flex justify-center items-center my-8 max-w-full">
+	<div class="space-y-5 mt-2 mx-2 flex flex-col items-center max-w-full px-2">
+		<!-- <h2 class="h2">Welcome to Locus!</h2>-->
+		<p class="max-w-[300px] sm:max-w-[400px] text-justify">
+			
+				The <b>LOCUS</b> project (LOCalisation of Unidentified imageS) aims to offer a practical and
 				accessible solution for predicting the location of where an image on Earth was captured.
-			</b>
-		</p>
+			
+		</p> 
 
-		<p class="text-center">Drop an image below to get started!</p>
+		<p class="text-center text-sm"><i>Drop an image below to get started!</i></p>
 		<FileUpload on:prediction={handlePrediction} />
 		<MyMap {markerCoords} {activePins} />
 		<PredList {predictions} bind:activePins />

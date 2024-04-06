@@ -155,33 +155,35 @@
 	}
 </script>
 
-<div class="table-container text-token">
-	<table class="table table-hover">
-		<thead>
-			<tr>
-				<th></th>
-				<th>Prediction</th>
-				<th>Latitude</th>
-				<th>Longitude</th>
-				<th>Probability</th>
-				<th></th>
-			</tr>
-		</thead>
-		<tbody>
-			{#each top10 as row}
-				<tr on:click={() => handleClick(row.index)} class="cursor-pointer">
-					<td>{row.index + 1}</td>
-					<td>{formatLocation(row.lat, row.lon)}</td>
-					<td>{row.lat}</td>
-					<td>{row.lon}</td>
-					<td><span class={`badge ${badgeColor(row.prob)}`}>{formatProb(row.prob)}</span></td>
-					<td>
-						{#if row.active}
-							<MapPinAltSolid class={colorList[row.index]} />
-						{/if}
-					</td>
+<div class="overflow-auto max-w-full">
+	<div class="table-container text-token">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th></th>
+					<th>Prediction</th>
+					<th>Latitude</th>
+					<th>Longitude</th>
+					<th>Probability</th>
+					<th></th>
 				</tr>
-			{/each}
-		</tbody>
-	</table>
+			</thead>
+			<tbody>
+				{#each top10 as row}
+					<tr on:click={() => handleClick(row.index)} class="cursor-pointer">
+						<td>{row.index + 1}</td>
+						<td>{formatLocation(row.lat, row.lon)}</td>
+						<td>{row.lat}</td>
+						<td>{row.lon}</td>
+						<td><span class={`badge ${badgeColor(row.prob)}`}>{formatProb(row.prob)}</span></td>
+						<td>
+							{#if row.active}
+								<MapPinAltSolid class={colorList[row.index]} />
+							{/if}
+						</td>
+					</tr>
+				{/each}
+			</tbody>
+		</table>
+	</div>
 </div>
