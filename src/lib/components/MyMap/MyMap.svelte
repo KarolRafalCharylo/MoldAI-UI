@@ -28,10 +28,7 @@
 			myMarkers.forEach((marker) => marker.remove());
 		}
 
-		myMarkers = markerCoords.map((coords, i) => L.marker(coords, 
-        
-        // { icon: getIcon(i) }
-    ));
+		myMarkers = markerCoords.map((coords, i) => L.marker(coords, { icon: getIcon(i) }));
 	}
 
 	$: if (activePins && map) {
