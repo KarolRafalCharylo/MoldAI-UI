@@ -1,5 +1,4 @@
 <script lang="ts">
-	import MyMap from '$lib/components/MyMap/MyMap.svelte';
 	import FileUpload from '$lib/components/FileUpload/FileUpload.svelte';
 	import { cellCenter } from '$lib/utils/cellUtils';
 	import PredList from '$lib/components/PredList/PredList.svelte';
@@ -7,21 +6,20 @@
 
 	let predictions: Prediction[] | null = null;
 
-	let activePins: Array<number> = [];
-	$: markerCoords = predictions
-		? (predictions.slice(0, 10).map((p) => [p.lat, p.lon]) as Array<[number, number]>)
-		: null;
-
-	function handlePrediction(event: { detail: Array<[string, number]> }) {
+	function handlePrediction(event: { detail: Array<{class_name: string, probability: number}> }) {
 		const a = event.detail;
-		a.sort((a, b) => b[1] - a[1]);
+
+	function splitClassName(class_name: string) {
+		const [genus, ...speciesParts] = class_name.split('-');
+		const species = speciesParts.join('-');
+		return { genus, species };
+	}
 
 		predictions = a.map((p) => {
-			const [cell, prob] = p;
-			const [lat, lon] = cellCenter(cell);
-			return { cell, lat, lon, prob };
+			const {class_name, probability} = p;
+			const {genus, species} = splitClassName(class_name);
+			return { class_name, probability, genus, species };
 		});
-		activePins = [0, 1, 2];
 	}
 </script>
 
@@ -30,14 +28,14 @@
 		<!-- <h2 class="h2">Welcome to Locus!</h2>-->
 		<p class="max-w-[300px] sm:max-w-[400px] text-justify">
 			
-				The <b>LOCUS</b> project (LOCalisation of Unidentified imageS) aims to offer a practical and
-				accessible solution for predicting the location of where an image on Earth was captured.
+				The <b>MoldAI</b> project aims to assist in fungi classification process conducted 
+				at DTU Bioengineering utilizing the Visual Transformers (ViT16). 
+				The model outputs top 5 predictions with the respected certainty.
 			
 		</p> 
 
 		<p class="text-center text-sm"><i>Drop an image below to get started!</i></p>
 		<FileUpload on:prediction={handlePrediction} />
-		<MyMap {markerCoords} {activePins} />
-		<PredList {predictions} bind:activePins />
+		<PredList {predictions}/>
 	</div>
 </div>

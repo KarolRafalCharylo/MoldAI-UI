@@ -67,7 +67,7 @@
 		const formData = new FormData();
 
 		// Append the file to the FormData object
-		formData.append('img', files[0]);
+		formData.append('file', files[0]);
 
 		const response1 = fetch(`${PUBLIC_API_URL}/predict/`, {
 			method: 'POST',
@@ -115,13 +115,13 @@
                     {#if noFileSelected}
 					<b>Upload a file</b> or drag and drop
                     {:else}
-					Predicting location of <code class="code text-ellipsis break-words max-w-full inline-block overflow-hidden">{files[0].name}</code>
+					Predicting genus and species of <code class="code text-ellipsis break-words max-w-full inline-block overflow-hidden">{files[0].name}</code>
                     {/if}
                 </div>
 			</svelte:fragment>
 			<svelte:fragment slot="meta">
 				<small>
-					Only <code class="code">.jpg</code> files are supported - support for more files coming soon(ish)!</small
+					Only image files extensions are supported!</small
 				>
 			</svelte:fragment>
 		</FileDropzone>
