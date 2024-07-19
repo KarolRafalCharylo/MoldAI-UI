@@ -121,7 +121,7 @@
 			</svelte:fragment>
 			<svelte:fragment slot="meta">
 				<small>
-					Only image files extensions are supported!</small
+					Only image files are supported!</small
 				>
 			</svelte:fragment>
 		</FileDropzone>
