@@ -41,6 +41,10 @@
 		const species = speciesParts.join('-');
 		return {genus, species};
 	}
+
+	function capitalizeFirstLetter(string: string): string {
+		return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+	}
 </script>
 
 <div class="table-container text-token">
@@ -51,7 +55,6 @@
 				<th>Genus</th>
 				<th>Species</th>
 				<th>Probability</th>
-				<th></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -59,7 +62,7 @@
 				<tr>
 					<td>{row.index + 1}</td>
 					<td>{row.genus}</td>
-					<td>{row.species}</td>					
+					<td>{capitalizeFirstLetter(row.species)}</td>					
 					<td><span class={`badge ${badgeColor(row.probability)}`}>{formatProb(row.probability)}</span></td>
 				</tr>
 			{/each}
